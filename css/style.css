@@ -51,3 +51,8 @@ body {
     background: #888;
     border-radius: 4px;
 }
+
+/* Styles supplémentaires pour la liste de localisation */
+#location-list > div {
+    opacity: 0.9;
+}

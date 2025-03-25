@@ -75,19 +75,20 @@ function createMarkers() {
 function generateLocationList() {
     const locationList = document.getElementById('location-list');
     locationList.innerHTML = locations.map(location => `
-        <div class="bg-white rounded-lg p-6 shadow-md hover:shadow-xl transition-all cursor-pointer group"
-             data-lat="${location.lat}" 
-             data-lng="${location.lng}" 
-             data-address="${location.address}"
-             data-website="${location.website}">
-            <h2 class="text-2xl font-semibold ${location.type === 'cave' ? 'text-blue-800' : 'text-red-800'} mb-3">
-                ${location.name}
-            </h2>
-            <p class="text-gray-600 mb-2">${location.address}</p>
-            <p class="text-sm text-gray-500">${location.description}</p>
-            <span class="text-sm font-semibold text-green-700 mt-2">
-                Spécialité : ${location.specialty}
-            </span>
+        <div class="bg-white rounded-lg p-6 shadow-md transition-all flex items-center justify-between">
+            <div class="flex-grow">
+                <h2 class="text-2xl font-semibold ${location.type === 'cave' ? 'text-blue-800' : 'text-red-800'} mb-3">
+                    ${location.name}
+                </h2>
+                <p class="text-gray-600 mb-2">${location.address}</p>
+                <p class="text-sm text-gray-500">${location.description}</p>
+                <span class="text-sm font-semibold text-green-700 mt-2">
+                    Spécialité : ${location.specialty}
+                </span>
+            </div>
+            <a href="${location.website}" target="_blank" class="ml-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-sm">
+                Visiter le site
+            </a>
         </div>
     `).join('');
 }
@@ -106,28 +107,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const showAllButton = document.getElementById('show-all');
     showAllButton.addEventListener('click', showAllLocations);
-
-    document.getElementById('location-list').addEventListener('click', (e) => {
-        const locationElement = e.target.closest('[data-lat][data-lng]');
-        if (locationElement) {
-            const lat = parseFloat(locationElement.getAttribute('data-lat'));
-            const lng = parseFloat(locationElement.getAttribute('data-lng'));
-            const name = locationElement.querySelector('h2').textContent;
-            const address = locationElement.getAttribute('data-address');
-            const description = locationElement.querySelector('p.text-sm.text-gray-500').textContent;
-            const website = locationElement.getAttribute('data-website');
-
-            map.setView([lat, lng], 12);
-
-            document.getElementById('modal-title').textContent = name;
-            document.getElementById('modal-address').textContent = address;
-            document.getElementById('modal-description').textContent = description;
-            document.getElementById('modal-website').setAttribute('href', website);
-            document.getElementById('detail-modal').classList.remove('hidden');
-        }
-    });
-
-    document.getElementById('modal-close').addEventListener('click', () => {
-        document.getElementById('detail-modal').classList.add('hidden');
-    });
 });
