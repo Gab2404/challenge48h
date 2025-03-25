@@ -1,158 +1,57 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Vignobles de Bordeaux</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vignobles de Bordeaux - Exploration du Patrimoine Viticole</title>
 
-  <!-- Feuilles de style et scripts externes -->
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-  />
-  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-  <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Bibliothèques externes -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Feuille de style personnalisée -->
-  <link rel="stylesheet" href="css/styles.css" />
+    <!-- Styles personnalisés -->
+    <link rel="stylesheet" href="css/styles.css">
 </head>
-<body class="bg-gray-50">
-  <!-- En-tête -->
-  <header class="bg-gradient-to-r from-blue-800 to-blue-600 text-white py-8 shadow-lg">
-    <h1 class="text-4xl font-bold text-center">
-      Vignobles de Bordeaux
-    </h1>
-    <p class="text-center mt-2 text-lg">
-      Découvrez les caves et châteaux emblématiques du vignoble bordelais
-    </p>
-  </header>
-
-  <!-- Contenu principal -->
-  <main class="container mx-auto px-4 py-8">
-    <div class="grid md:grid-cols-2 gap-8">
-      <!-- Colonne de gauche : Liste et bouton "Afficher tous" -->
-      <section>
-        <!-- Bouton pour afficher tous les établissements sur la carte -->
-        <button
-          id="show-all"
-          class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 mb-4 w-full"
-        >
-          Afficher tous les établissements
-        </button>
-
-        <!-- Liste des localisations -->
-        <div
-          id="location-list"
-          class="space-y-6 overflow-y-auto max-h-[700px] pr-2"
-        >
-          <!-- Exemple d'éléments (les attributs data-* servent à alimenter le modal et la carte) -->
-          <div
-            class="bg-white rounded-lg p-6 shadow-md hover:shadow-xl transition-all cursor-pointer group"
-            data-type="cave"
-            data-lat="44.8641"
-            data-lng="-0.5593"
-            data-address="134 Quai de la Garonne, 33300 Bordeaux"
-            data-website="https://www.laciteduvin.com/"
-          >
-            <h2 class="text-2xl font-semibold text-blue-800 mb-3">
-              La Cité du Vin
-            </h2>
-            <p class="text-gray-600 mb-2">Cave à Vin</p>
-            <p class="text-sm text-gray-500">
-              Musée et centre d'interprétation entièrement dédié au vin
-            </p>
-          </div>
-
-          <div
-            class="bg-white rounded-lg p-6 shadow-md hover:shadow-xl transition-all cursor-pointer group"
-            data-type="chateau"
-            data-lat="45.1933"
-            data-lng="-0.7486"
-            data-address="Pauillac, Médoc"
-            data-website="https://www.lafite.com/"
-          >
-            <h2 class="text-2xl font-semibold text-red-800 mb-3">
-              Château Lafite Rothschild
-            </h2>
-            <p class="text-gray-600 mb-2">Pauillac, Médoc</p>
-            <p class="text-sm text-gray-500">
-              L'un des plus prestigieux châteaux du vignoble bordelais, Premier Cru Classé
-            </p>
-          </div>
-
-          <div
-            class="bg-white rounded-lg p-6 shadow-md hover:shadow-xl transition-all cursor-pointer group"
-            data-type="chateau"
-            data-lat="44.9497"
-            data-lng="-0.6573"
-            data-address="Margaux, Médoc"
-            data-website="https://www.chateau-margaux.com/"
-          >
-            <h2 class="text-2xl font-semibold text-red-800 mb-3">
-              Château Margaux
-            </h2>
-            <p class="text-gray-600 mb-2">Margaux, Médoc</p>
-            <p class="text-sm text-gray-500">
-              Premier Grand Cru Classé, symbole de l'excellence bordelaise
-            </p>
-          </div>
-
-          <div
-            class="bg-white rounded-lg p-6 shadow-md hover:shadow-xl transition-all cursor-pointer group"
-            data-type="chateau"
-            data-lat="44.9125"
-            data-lng="-0.1392"
-            data-address="Pomerol"
-            data-website="https://www.chateau-petrus.com/"
-          >
-            <h2 class="text-2xl font-semibold text-red-800 mb-3">
-              Château Pétrus
-            </h2>
-            <p class="text-gray-600 mb-2">Pomerol</p>
-            <p class="text-sm text-gray-500">
-              Vignoble légendaire produisant l'un des vins les plus recherchés au monde
-            </p>
-          </div>
+<body class="bg-gray-50 font-sans">
+    <header class="bg-gradient-to-r from-blue-900 to-blue-700 text-white py-8 shadow-lg">
+        <div class="container mx-auto text-center">
+            <h1 class="text-4xl font-bold mb-3">Vignobles de Bordeaux</h1>
+            <p class="text-xl">Découvrez les caves et châteaux emblématiques du vignoble bordelais</p>
         </div>
-      </section>
+    </header>
 
-      <!-- Colonne de droite : Carte Leaflet -->
-      <section>
-        <div
-          id="map"
-          class="w-full rounded-lg shadow-md bg-gray-200"
-        ></div>
-      </section>
+    <main class="container mx-auto px-4 py-8">
+        <div class="grid md:grid-cols-2 gap-8">
+            <section>
+                <button id="show-all" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 mb-4 w-full">
+                    Afficher tous les établissements
+                </button>
+
+                <div id="location-list" class="space-y-6 overflow-y-auto max-h-[700px] pr-2">
+                    <!-- Liste des vignobles sera dynamiquement générée par JavaScript -->
+                </div>
+            </section>
+
+            <section>
+                <div id="map" class="w-full h-[600px] rounded-lg shadow-md bg-gray-200"></div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Modal de détail avec la classe z-50 pour le placer au-dessus de la carte -->
+    <div id="detail-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-6 w-11/12 md:w-1/2 relative">
+            <button id="modal-close" class="absolute top-2 right-2 text-3xl text-gray-600 hover:text-gray-800">&times;</button>
+            <h2 id="modal-title" class="text-2xl font-bold mb-4 text-blue-800"></h2>
+            <p id="modal-address" class="text-gray-600 mb-2"></p>
+            <p id="modal-description" class="text-sm text-gray-500 mb-4"></p>
+            <a id="modal-website" href="#" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                Visiter le site
+            </a>
+        </div>
     </div>
-  </main>
 
-  <!-- Modal de détails -->
-  <div
-    id="detail-modal"
-    class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden"
-  >
-    <div class="bg-white rounded-lg p-6 w-11/12 md:w-1/2 relative">
-      <button
-        id="modal-close"
-        class="absolute top-2 right-2 text-gray-600 hover:text-gray-800 text-2xl"
-      >
-        &times;
-      </button>
-      <h2 id="modal-title" class="text-2xl font-bold mb-4"></h2>
-      <p id="modal-address" class="text-gray-600 mb-2"></p>
-      <p id="modal-description" class="text-sm text-gray-500 mb-4"></p>
-      <a
-        id="modal-website"
-        href="#"
-        target="_blank"
-        class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-      >
-        Visiter le site
-      </a>
-    </div>
-  </div>
-
-  <!-- Script principal (assure-toi d'avoir le fichier js/app.js) -->
-  <script src="js/app.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>

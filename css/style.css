@@ -1,35 +1,53 @@
-/* css/styles.css */
+/* Styles globaux */
+body {
+    font-family: 'Arial', sans-serif;
+}
 
-/* Assure une hauteur suffisante pour la carte Leaflet */
+/* Configuration de la carte Leaflet */
 #map {
     height: 600px;
-  }
-  
-  /* Icônes personnalisées pour Leaflet */
-  .custom-div-icon {
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Icônes personnalisées */
+.custom-div-icon {
     background-color: rgba(255, 255, 255, 0.7);
     border-radius: 50%;
     border: 2px solid;
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-  
-  .cave-icon {
-    border-color: #2563eb; /* Bleu Tailwind (blue-600) */
-  }
-  
-  .chateau-icon {
-    border-color: #dc2626; /* Rouge Tailwind (red-600) */
-  }
-  
-  /* Animation de transition pour le modal */
-  #detail-modal {
+}
+
+.cave-icon {
+    border-color: #2563eb; /* Bleu Tailwind */
+}
+
+.chateau-icon {
+    border-color: #dc2626; /* Rouge Tailwind */
+}
+
+/* Animation du modal */
+#detail-modal {
     transition: opacity 0.3s ease;
-  }
-  
-  #detail-modal.hidden {
+}
+
+#detail-modal.hidden {
     opacity: 0;
     pointer-events: none;
-  }
-  
+}
+
+/* Scrollbar personnalisée pour la liste */
+#location-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+#location-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+#location-list::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
